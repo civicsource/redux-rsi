@@ -4,8 +4,8 @@ export default function createAjaxAction(action, getPromise) {
 		if (!promise) return;
 
 		promise
-			.then(response => dispatch(completed(response))
-			.catch(err => dispatch(failed(err));
+			.then(response => dispatch(completed(response)))
+			.catch(err => dispatch(failed(err)));
 
 		dispatch(action);
 	};
