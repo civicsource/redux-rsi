@@ -112,3 +112,76 @@ ContainerComponent.propTypes = {
 
 export default ContainerComponent;
 ```
+
+### `createAjaxAction(action, getPromise)`
+
+If you are using the [redux-thunk](https://github.com/gaearon/redux-thunk) middleware to make AJAX calls, you might find yourself constantly writing action creators similar to the following:
+
+```js
+export function fetchUser(username) {
+	return (dispatch, getState) => {
+		if (!!getState().users.get(username)) {
+			//don't fetch if the user is already loaded in the current state
+			return;
+		}
+
+		api.fetchUser(username) //this is a separate API lib which will make the AJAX call and return a promise
+			.then(response => dispatch(fetchCompleted(response))
+			.catch(err => dispatch(fetchFailed(err));
+
+		dispatch({
+			type: "USERS_FETCH",
+			payload: username
+		});
+	};
+}
+
+function fetchCompleted(response) {
+	return {
+		type: "USERS_FETCH_COMPLETED",
+		payload: response.body
+	};
+}
+
+function fetchFailed(err) {
+	return {
+		type: "USERS_FETCH_FAILED",
+		payload: err
+	};
+}
+```
+
+`createAjaxAction` will help you reduce this boilerplate when making an AJAX call:
+
+```js
+import { createAjaxAction } from "@civicsource/redux";
+
+export function fetchUser(username) {
+	return createAjaxAction({
+		type: "USERS_FETCH",
+		payload: username
+	}, getState => {
+		if (!!getState().users.get(username)) {
+			//don't fetch if the user is already loaded in the current state
+			return;
+		}
+
+		return api.fetchUser(username);
+	});
+}
+```
+
+The first argument is the action you want to dispatch. The action type will be used to create two new action types (one with a `_COMPLETED` appended and one with a `_FAILED` appended).
+
+The second argument is your function that will return a `Promise`. If nothing is returned, nothing will be dispatched (e.g. in this case, if the user has already been fetched).
+
+If you have no reason to check the current state, this example can be reduced further:
+
+```js
+export function fetchUser(username) {
+	return createAjaxAction({
+		type: "USERS_FETCH",
+		payload: username
+	}, () => api.fetchUser(username));
+}
+```
