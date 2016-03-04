@@ -18,7 +18,7 @@ export default function createAjaxAction(action, getPromise) {
 	function completed(response) {
 		return {
 			type: action.type + "_COMPLETED",
-			payload: response.body
+			payload: response
 		};
 	}
 
