@@ -25,7 +25,8 @@ export default function createAjaxAction(action, getPromise) {
 	function failed(err) {
 		return {
 			type: action.type + "_FAILED",
-			payload: err
+			payload: err,
+			error: true
 		};
 	}
 }
