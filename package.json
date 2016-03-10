@@ -1,6 +1,6 @@
 {
   "name": "@civicsource/redux",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "Redux utility functions to help implement CivicSource conventions",
   "main": "lib/index.js",
   "author": "Archon Information Systems",

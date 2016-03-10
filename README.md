@@ -18,6 +18,8 @@ npm install @civicsource/redux --save
 
 As your app grows more complex, a `switch` statement in your reducer no longer cuts it when trying to handle actions. The `createReducer` function takes the initial state of your reducer and will autowire actions to the object you pass in as the `handlers` parameter. e.g. If an action of type `MessageSend` is dispatched, it will be autowired to a function with the same name with the `on` prefix applied, e.g. `onMessageSend`. Internally, it uses [lodash's string methods](https://lodash.com/docs#camelCase) to wire the methods, so dispatching with type `messageSend`, `message-send`, or `MESSAGE_SEND` will still work.
 
+`createReducer` assumes your actions are all [Flux Standard Actions](https://github.com/acdlite/flux-standard-action). If an action handler cannot be found and the action is an error action (e.g. `action.error` is `true`), it will try to call `handleError` on your reducer object.
+
 ```js
 import { Map } from "immutable"; //using immutable.js for immutable state in our reducer
 import { createReducer } from "@civicsource/redux";
@@ -43,6 +45,12 @@ const users = createReducer(Map({
 			isAuthenticated: true,
 			user: user
 		});
+	},
+
+	handleError(state, type, err) {
+		//do something nice with this error
+		console.log(err);
+		return state;
 	}
 });
 ```
