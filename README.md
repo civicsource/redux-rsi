@@ -106,7 +106,7 @@ const UserProfileContainer = connect((state, props) =>({
 export default UserProfileContainer;
 ```
 
-Optionally, if your component takes more `props` and you only want the update `fn` to run on certain prop updates, you can pass a list of keys to `fetchOnUpdate`:
+Optionally, if your component takes more `props` and you only want the update `fn` to run on certain prop updates (which is usually the case), you can pass a list of keys to `fetchOnUpdate`:
 
 ```js
 const UserProfileFetcher = fetchOnUpdate(({ username, fetchUser }) => {
