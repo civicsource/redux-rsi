@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import shallowEqual from "react-redux/lib/utils/shallowEqual";
+import shallowEqual from "shallowequal";
 
-export default function fetchOnUpdate(keys, fn, shouldRender) {
+export default function fetchOnUpdate(fn, ...keys) {
 	return DecoratedComponent => class FetchOnUpdateDecorator extends Component {
 		componentWillMount() {
-			fn(mapParams(keys, this.props));
+			fn(this.props);
 		}
 
 		componentDidUpdate (prevProps) {
@@ -12,15 +12,11 @@ export default function fetchOnUpdate(keys, fn, shouldRender) {
 			const prevParams = mapParams(keys, prevProps);
 
 			if (!shallowEqual(params, prevParams)) {
-				fn(params);
+				fn(this.props);
 			}
 		}
 
 		render() {
-			if (shouldRender && !shouldRender(this.props)) {
-				return null;
-			}
-
 			return <DecoratedComponent {...this.props} />;
 		}
 	}
