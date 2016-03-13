@@ -23,7 +23,7 @@ export default function fetchOnUpdate(fn, ...keys) {
 }
 
 function mapParams (paramKeys, params) {
-	if (keys.length < 1) return params;
+	if (paramKeys.length < 1) return params;
 
 	return paramKeys.reduce((acc, key) => {
 		return Object.assign({}, acc, { [key]: params[key] });
