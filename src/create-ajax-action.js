@@ -3,9 +3,14 @@ export default function createAjaxAction(action, getPromise) {
 		const promise = getPromise(getState);
 		if (!promise) return;
 
-		promise
-			.catch(err => { dispatch(failed(err, action.payload)); })
-			.then(response => { dispatch(completed(response, action.payload)); });
+		promise.then(response => {
+			//setTimeout here for dispatching success so that any errors that occur during the dispatch are not
+			//handled & potentially swallowed by the promise's catch. A failure should be dispatched only if the
+			//AJAX request iteslf fails, not any error that occurs as a result of processing the AJAX request.
+			setTimeout(() => dispatch(completed(response, action.payload)), 0);
+		}).catch(err => {
+			setTimeout(() => dispatch(failed(err, action.payload)), 0);
+		});
 
 		dispatch(action);
 	};
