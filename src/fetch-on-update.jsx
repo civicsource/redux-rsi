@@ -19,7 +19,7 @@ export default function fetchOnUpdate(fn, ...keys) {
 		render() {
 			return <DecoratedComponent {...this.props} />;
 		}
-	}
+	};
 }
 
 function mapParams (paramKeys, params) {

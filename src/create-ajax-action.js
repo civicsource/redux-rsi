@@ -14,7 +14,7 @@ export default function createAjaxAction(action, getPromise) {
 
 	function completed(payload, meta) {
 		return {
-			type: action.type + "_COMPLETED",
+			type: `${action.type}_COMPLETED`,
 			payload,
 			meta
 		};
@@ -22,7 +22,7 @@ export default function createAjaxAction(action, getPromise) {
 
 	function failed(payload, meta) {
 		return {
-			type: action.type + "_FAILED",
+			type: `${action.type}_FAILED`,
 			payload,
 			meta,
 			error: true
