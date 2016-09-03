@@ -1,9 +1,3 @@
-import createReducer from "./create-reducer";
-import fetchOnUpdate from "./fetch-on-update";
-import createAjaxAction from "./create-ajax-action";
-
-export {
-	createReducer,
-	fetchOnUpdate,
-	createAjaxAction
-};
+export createReducer from "./create-reducer";
+export fetchOnUpdate from "./fetch-on-update";
+export createAjaxAction from "./create-ajax-action";

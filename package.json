@@ -9,13 +9,6 @@
     "type": "git",
     "url": "https://github.com/civicsource/redux.git"
   },
-  "babel": {
-    "presets": [
-      "es2015",
-      "react",
-      "stage-2"
-    ]
-  },
   "scripts": {
     "compile": "babel -d lib src",
     "lint": "eslint src --ext=js,jsx",
@@ -35,6 +28,7 @@
     "babel-cli": "^6.3.15",
     "babel-core": "^6.3.15",
     "babel-eslint": "^6.1.2",
+    "babel-plugin-transform-export-extensions": "^6.8.0",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-2": "^6.3.13",
