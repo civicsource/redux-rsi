@@ -189,3 +189,51 @@ export function fetchUser(username) {
 	}, () => api.fetchUser(username));
 }
 ```
+
+### `mergeWithCurrent(state, key, data, [initFn])`
+
+If your state tree is a keyed object, you may find yourself writing a lot of code that looks something like this:
+
+```js
+export default createReducer(Immutable({}), {
+	onSomethingHappened(state, data) {
+		// first, get the current item in our state because we don't want to overwrite anything
+		// if no item exists, just create an empty item
+		let item = state[data.key] || initEmptyItem();
+
+		// merge the new data from the server (while not overwriting anything the server didn't send back)
+		item = item.merge(data);
+
+		// set the new data on the state and return it
+		return state.set(data.key, item);
+	}
+});
+
+// our function to init an empty item
+function initEmptyItem() {
+	return Immutable({
+		isLoading: false,
+		isLoaded: false,
+		items: []
+	})
+}
+```
+
+`mergeWithCurrent` will help you reduce this boilerplate:
+
+```js
+import { mergeWithCurrent } from "@civicsource/redux";
+
+export default createReducer(Immutable({}), {
+	onSomethingHappened(state, data) {
+		return mergeWithCurrent(
+			state,			//the state tree
+			data.key,		//the key of the item we want to merge
+			data,			//the new data to merge with any existing data
+			initEmptyItem 	//an optional init function if the data doesn't already exist (if none passed, defaults to {})
+		);
+	}
+});
+```
+
+The above two examples are equivalent.
