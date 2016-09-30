@@ -14,6 +14,11 @@ npm install @civicsource/redux --save
 
 ## API Reference
 
+1. [`createReducer`](#createreducerinitialstate-handlers)
+2. [`fetchOnUpdate`](#fetchonupdatefn-keys)
+3. [`createAjaxAction`](#createajaxactionaction-getpromise)
+4. [`mergeWithCurrent`](#mergewithcurrentstate-key-data-initfn)
+
 ### `createReducer(initialState, handlers)`
 
 As your app grows more complex, a `switch` statement in your reducer no longer cuts it when trying to handle actions. The `createReducer` function takes the initial state of your reducer and will autowire actions to the object you pass in as the `handlers` parameter. e.g. If an action of type `MessageSend` is dispatched, it will be autowired to a function with the same name with the `on` prefix applied, e.g. `onMessageSend`. Internally, it uses [lodash's string methods](https://lodash.com/docs#camelCase) to wire the methods, so dispatching with type `messageSend`, `message-send`, or `MESSAGE_SEND` will still work.
