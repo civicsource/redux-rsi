@@ -16,10 +16,11 @@
     "prepublish": "npm run lint && npm run compile"
   },
   "dependencies": {
-    "lodash.camelcase": "4.3.x",
-    "lodash.upperfirst": "4.3.x",
-    "lodash.memoize": "4.1.x",
-    "reselect": "2.5.x",
+    "lodash.camelcase": "4.x",
+    "lodash.memoize": "4.x",
+    "lodash.upperfirst": "4.x",
+    "reselect": "2.x",
+    "seamless-immutable": "6.x",
     "shallowequal": "0.2.x"
   },
   "peerDependencies": {
