@@ -1,6 +1,6 @@
 {
   "name": "redux-rsi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utility & helper functions for reducing the boilerplate necessary when creating redux reducers & actions",
   "main": "lib/index.js",
   "author": "Archon Information Systems",
@@ -9,6 +9,12 @@
     "type": "git",
     "url": "https://github.com/civicsource/redux-rsi.git"
   },
+  "keywords": [
+    "redux",
+    "utility",
+    "toolbelt",
+    "reducers"
+  ],
   "scripts": {
     "compile": "rimraf lib && babel -d lib src",
     "lint": "eslint src --ext=js,jsx",
