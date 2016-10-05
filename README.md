@@ -204,7 +204,7 @@ export default createReducer(Immutable({}), {
 	onSomethingHappened(state, data) {
 		// first, get the current item in our state because we don't want to overwrite anything
 		// if no item exists, just create an empty item
-		let item = state[data.key] || initEmptyItem();
+		let item = state[data.key] || initEmptyItem(data.key);
 
 		// merge the new data from the server (while not overwriting anything the server didn't send back)
 		item = item.merge(data);
@@ -215,8 +215,9 @@ export default createReducer(Immutable({}), {
 });
 
 // our function to init an empty item
-function initEmptyItem() {
+function initEmptyItem(key) {
 	return Immutable({
+		key,
 		isLoading: false,
 		isLoaded: false,
 		items: []
@@ -241,4 +242,4 @@ export default createReducer(Immutable({}), {
 });
 ```
 
-The above two examples are equivalent.
+The above two examples are equivalent. The `initFn` will receive the state `key` as its only argument.
