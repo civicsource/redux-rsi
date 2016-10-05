@@ -29,7 +29,7 @@ As your app grows more complex, a `switch` statement in your reducer no longer c
 
 ```js
 import { Map } from "immutable"; //using immutable.js for immutable state in our reducer
-import { createReducer } from "@civicsource/redux";
+import { createReducer } from "redux-rsi";
 
 const users = createReducer(Map({
 	isAuthenticating: false,
@@ -94,7 +94,7 @@ This is a simple component that will display user information given a user objec
 
 ```js
 import React, { Component, PropTypes as t } from "react";
-import { fetchOnUpdate } from "@civicsource/redux";
+import { fetchOnUpdate } from "redux-rsi";
 import UserProfile from "./user"; //the presenational user component
 import { fetchUser } from "./actions/user"; //the redux action creator we will use to fire off a fetchUser action
 import { connect } from "react-redux"; //we will use this to connect this component to the store state
@@ -165,7 +165,7 @@ function fetchFailed(err) {
 `createAjaxAction` will help you reduce this boilerplate when making an AJAX call:
 
 ```js
-import { createAjaxAction } from "@civicsource/redux";
+import { createAjaxAction } from "redux-rsi";
 
 export function fetchUser(username) {
 	return createAjaxAction({
@@ -230,7 +230,7 @@ function initEmptyItem(key) {
 `mergeWithCurrent` will help you reduce this boilerplate:
 
 ```js
-import { mergeWithCurrent } from "@civicsource/redux";
+import { mergeWithCurrent } from "redux-rsi";
 
 export default createReducer(Immutable({}), {
 	onSomethingHappened(state, data) {
