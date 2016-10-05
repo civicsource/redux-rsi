@@ -1,15 +1,17 @@
-# Redux
+# Redux RSI
 
-> [Redux](http://rackt.org/redux/) utility functions to help implement CivicSource conventions
+> Reduce your risk of [repetitive strain injury](https://en.wikipedia.org/wiki/Repetitive_strain_injury) when using [Redux](http://rackt.org/redux/)
 
-If you are new to Redux, [start with the documentation](https://facebook.github.io/flux/docs/overview.html) (the _Introduction_ & the _Basics_).
+![rsi](rsi.jpg)
+
+Utility & helper functions for reducing the (already pretty minimal) boilerplate necessary when creating redux reducers & actions.
+
+This is also what our team uses to enforce coding conventions when writing redux applications. It helps to keep things consistent.
 
 ## Install
 
-Make sure you have the [CivicSource private npm registry](https://github.com/civicsource/first-time-setup#civicsource-npm-feed) set up.
-
 ```
-npm install @civicsource/redux --save
+npm install redux-rsi --save
 ```
 
 ## API Reference
@@ -62,7 +64,7 @@ const users = createReducer(Map({
 
 ### `fetchOnUpdate(fn, [...keys])`
 
-This is a HoC (higher order component) that will reduce the amount of boilerplate you need when writing a component that will need to do data fetching on load. In general, you should strive to separate your components into [presentational & container components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0). In doing this, you can cleanly separate your presentation logic from your data-fetching logic. Here is an example:
+This is a HOC (higher order component) that will reduce the amount of boilerplate you need when writing a component that will need to do data fetching on load. In general, you should strive to separate your components into [presentational & container components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0). In doing this, you can cleanly separate your presentation logic from your data-fetching logic. Here is an example:
 
 #### `user.js`
 
@@ -70,19 +72,19 @@ This is a HoC (higher order component) that will reduce the amount of boilerplat
 import React, { Component, PropTypes as t } from "react";
 
 export default class UserProfile extends Component {
-    render() {
-        const user = this.props.user;
+	render() {
+		const user = this.props.user;
 
 		if (!user) {
 			return null;
 		}
 
-        if (user.isLoading) {
-            return <span>Loading...</span>;
-        }
+		if (user.isLoading) {
+			return <span>Loading...</span>;
+		}
 
-        return <span title={user.username}>{user.email}</span>;
-    }
+		return <span title={user.username}>{user.email}</span>;
+	}
 }
 ```
 
