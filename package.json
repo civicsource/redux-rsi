@@ -1,13 +1,13 @@
 {
-  "name": "@civicsource/redux",
-  "version": "1.3.0",
-  "description": "Redux utility functions to help implement CivicSource conventions",
+  "name": "redux-rsi",
+  "version": "1.0.0",
+  "description": "Utility & helper functions for reducing the boilerplate necessary when creating redux reducers & actions",
   "main": "lib/index.js",
   "author": "Archon Information Systems",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/civicsource/redux.git"
+    "url": "https://github.com/civicsource/redux-rsi.git"
   },
   "scripts": {
     "compile": "rimraf lib && babel -d lib src",
