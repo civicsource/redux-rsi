@@ -122,7 +122,7 @@ const UserProfileFetcher = fetchOnUpdate(({ username, fetchUser }) => {
 }, "username", "fetchUser")(UserProfile);
 ```
 
-Now, the update function will only run if the specific `username` or `fetchUser` props change.
+Now, the update function will only run if the specific `username` or `fetchUser` props change. You can use object paths of arbitrary length here: e.g. `user.username`; in which case the `fn` will only run if the `username` field on `user` changes.
 
 ### `createAjaxAction(action, getPromise)`
 
