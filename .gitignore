@@ -3,3 +3,4 @@ npm-debug.log
 .module-cache
 
 /lib
+yarn.lock
