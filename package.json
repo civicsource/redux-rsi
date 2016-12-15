@@ -22,16 +22,14 @@
     "prepublish": "npm run lint && npm run compile"
   },
   "dependencies": {
-    "lodash.camelcase": "4.x",
-    "lodash.memoize": "4.x",
-    "lodash.upperfirst": "4.x",
+    "lodash": "4.x",
     "reselect": "2.x",
     "seamless-immutable": "6.x",
     "shallowequal": "0.2.x"
   },
   "peerDependencies": {
-    "redux": "3.x",
-    "react": ">= 0.14"
+    "react": ">= 0.14",
+    "redux": "3.x"
   },
   "devDependencies": {
     "babel-cli": "6.x",
