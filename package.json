@@ -1,6 +1,6 @@
 {
   "name": "redux-rsi",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Utility & helper functions for reducing the boilerplate necessary when creating redux reducers & actions",
   "main": "lib/index.js",
   "author": "Archon Information Systems",
