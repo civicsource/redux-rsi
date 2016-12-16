@@ -18,7 +18,7 @@ npm install redux-rsi --save
 
 1. [`createReducer`](#createreducerinitialstate-handlers)
 2. [`fetchOnUpdate`](#fetchonupdatefn-keys)
-3. [`createAjaxAction`](#createajaxactionaction-getpromise)
+3. [`createAjaxAction`](#createajaxactionaction-getpromise-onsuccessaction-onfailureaction)
 4. [`mergeWithCurrent`](#mergewithcurrentstate-key-data-initfn)
 
 ### `createReducer(initialState, handlers)`
@@ -124,7 +124,7 @@ const UserProfileFetcher = fetchOnUpdate(({ username, fetchUser }) => {
 
 Now, the update function will only run if the specific `username` or `fetchUser` props change. You can use object paths of arbitrary length here: e.g. `user.username`; in which case the `fn` will only run if the `username` field on `user` changes.
 
-### `createAjaxAction(action, getPromise)`
+### `createAjaxAction(action, getPromise, [onSuccessAction], [onFailureAction])`
 
 If you are using the [redux-thunk](https://github.com/gaearon/redux-thunk) middleware to make AJAX calls, you might find yourself constantly writing action creators similar to the following:
 
@@ -136,9 +136,11 @@ export function fetchUser(username) {
 			return;
 		}
 
-		api.fetchUser(username) //this is a separate API lib which will make the AJAX call and return a promise
-			.then(response => dispatch(fetchCompleted(response))
-			.catch(err => dispatch(fetchFailed(err));
+		//this is a separate API lib which will make the AJAX call and return a promise
+		api.fetchUser(username).then(
+			response => dispatch(fetchCompleted(response)),
+			err => dispatch(fetchFailed(err))
+		);
 
 		dispatch({
 			type: "USERS_FETCH",
@@ -194,6 +196,25 @@ export function fetchUser(username) {
 		type: "USERS_FETCH",
 		payload: username
 	}, () => api.fetchUser(username));
+}
+```
+
+You can also pass additional actions to dispatch on success & failure. e.g. if after the user is successfully fetched, you want to put the user in edit mode:
+
+```js
+// here is our normal editUser action creator
+export function editUser(username) {
+	return {
+		type: "USER_EDIT",
+		payload: username
+	}
+}
+
+export function fetchUser(username) {
+	return createAjaxAction({
+		type: "USERS_FETCH",
+		payload: username
+	}, () => api.fetchUser(username), editUser(username));
 }
 ```
 
