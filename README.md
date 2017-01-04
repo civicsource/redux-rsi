@@ -19,6 +19,7 @@ npm install redux-rsi --save
 1. [`createReducer`](#createreducerinitialstate-handlers)
 2. [`fetchOnUpdate`](#fetchonupdatefn-keys)
 3. [`createAjaxAction`](#createajaxactionaction-getpromise)
+3. [`asyncifyAction`](#asyncifyactionaction)
 4. [`mergeWithCurrent`](#mergewithcurrentstate-key-data-initfn)
 
 ### `createReducer(initialState, handlers)`
@@ -196,6 +197,39 @@ export function fetchUser(username) {
 	}, () => api.fetchUser(username));
 }
 ```
+
+### `asyncifyAction(action)`
+
+This will "asyncify" an action by returning to you the _completed_ & _failed_ action types by appending `_COMPLETED` and `_FAILED` to your original action type.
+
+```js
+import { asyncifyAction } from "redux-rsi";
+
+const fetchActions = asyncifyAction({
+	type: "USERS_FETCH",
+	payload: username
+});
+
+export function fetchUser(username) {
+	// assuming using redux-thunk here
+	return dispatch => {
+		// dispatch the original action USERS_FETCH
+		dispatch(fetchActions.request);
+
+		// simulate an ajax request & dispatch USERS_FETCH_COMPLETED after 2 seconds
+		setTimeout(fetchActions.completed({ hello: "from the server" }), 2000);
+		
+		// ...OR...
+
+		// simulate a failed ajax request & dispatch USERS_FETCH_FAILED after 2 seconds
+		setTimeout(fetchActions.failed({ message: "error from the server" }), 2000);
+	};
+}
+```
+
+The _failed_ & _completed_ actions have the payload from the original action set as their `meta` (see [Flux Standard Actions](https://github.com/acdlite/flux-standard-action)).
+
+This is what [`createAjaxAction`](#createajaxactionaction-getpromise) uses internally.
 
 ### `mergeWithCurrent(state, key, data, [initFn])`
 
