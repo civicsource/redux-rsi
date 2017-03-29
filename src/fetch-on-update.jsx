@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { get } from "lodash";
+import { get, set } from "lodash";
 import shallowEqual from "shallowequal";
 
 export default function fetchOnUpdate(fn, ...keys) {
@@ -26,16 +26,17 @@ export default function fetchOnUpdate(fn, ...keys) {
 function mapParams (paramKeys, params) {
 	if (paramKeys.length < 1) return params;
 
-	return paramKeys.reduce((result, path) => {
+	const result = {};
+
+	paramKeys.forEach(path => {
 		const value = get(params, path);
 
 		// move any nested paths to the root of the result
 		// for the purpose of doing a shallow comparison
-		const shallowKey = path.replace(".", "_");
+		path = path.replace(/\./g, "_");
 
-		return {
-			...result,
-			[shallowKey]: value
-		};
+		set(result, path, value);
 	});
+
+	return result;
 }
