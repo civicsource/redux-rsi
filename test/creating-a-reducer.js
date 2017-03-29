@@ -10,10 +10,6 @@ describe("Creating a reducer", function () {
 
 			onThingFailed(state, payload, meta) {
 				return `${state}, ouch the thing broke with ${payload} & ${meta}`;
-			},
-
-			handleError(state, payload, meta) {
-				return `${state}, ALSO AN ERROR HAPPENED WITH ${payload} & ${meta}`;
 			}
 		});
 	});
@@ -82,7 +78,7 @@ describe("Creating a reducer", function () {
 			});
 		});
 
-		it("should dispatch the action to the handler function and not to the general error handler", function() {
+		it("should dispatch the action to the handler function", function() {
 			expect(this.state).to.equal("ohhai, ouch the thing broke with goodbye & universe");
 		});
 	});

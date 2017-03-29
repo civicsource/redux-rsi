@@ -10,10 +10,6 @@ export default function createReducer(initialState, handlers) {
 			return handlers[actionType](state, action.payload, action.meta);
 		}
 
-		if (action.error && handlers["handleError"]) {
-			return handlers.handleError(state, action.type, action.payload, action.meta);
-		}
-
 		return state;
 	};
 }
