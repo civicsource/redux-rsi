@@ -5,16 +5,14 @@ import shallowEqual from "shallowequal";
 export default function fetchOnUpdate(fn, ...keys) {
 	return DecoratedComponent => class FetchOnUpdateDecorator extends Component {
 		componentWillMount() {
-			if (!this.props.disableFetch) {
-				fn(this.props);
-			}
+			fn(this.props);
 		}
 
 		componentDidUpdate (prevProps) {
 			const params = mapParams(keys, this.props);
 			const prevParams = mapParams(keys, prevProps);
 
-			if (!shallowEqual(params, prevParams) && !this.props.disableFetch) {
+			if (!shallowEqual(params, prevParams)) {
 				fn(this.props);
 			}
 		}
