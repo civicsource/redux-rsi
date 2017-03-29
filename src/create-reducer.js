@@ -1,7 +1,9 @@
 import convertActionType from "./convert-action-type";
 
 export default function createReducer(initialState, handlers) {
-	return function reducer(state = initialState, action) { // jshint ignore:line
+	return function reducer(state = initialState, action) {
+		if (!action) return state;
+
 		const actionType = convertActionType(action.type);
 
 		if (handlers.hasOwnProperty(actionType)) {
