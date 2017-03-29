@@ -279,3 +279,35 @@ export default createReducer(Immutable({}), {
 ```
 
 The above two examples are equivalent. The `initFn` will receive the state `key` as its only argument.
+
+## Contributing
+
+### Linting
+
+To run the linter:
+
+```
+npm run lint
+```
+
+and to automatically fix fixable errors:
+
+```
+npm run lint -- --fix
+```
+
+### Testing
+
+The tests are written BDD-style using [Mocha](https://mochajs.org/). To run them locally:
+
+```
+npm test
+```
+
+To debug the tests:
+
+```
+npm test -- --debug-brk
+```
+
+You can then use [Visual Studio Code](http://code.visualstudio.com/) (or whatever other debugger you desire) to debug through the tests.
