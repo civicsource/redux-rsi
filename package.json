@@ -17,8 +17,8 @@
     "reducers"
   ],
   "scripts": {
-    "compile-cjs": "rimraf lib && cross-env BABEL_ENV=cjs babel src -d lib",
-    "compile-es": "rimraf es && babel src -d es",
+    "compile-cjs": "rimraf lib && cross-env BABEL_ENV=cjs babel src -d lib -s",
+    "compile-es": "rimraf es && babel src -d es -s",
     "compile": "npm run compile-cjs && npm run compile-es",
     "lint": "eslint src test --ext=js,jsx",
     "test": "cross-env BABEL_ENV=cjs mocha --compilers js:babel-core/register --recursive --require babel-polyfill",
