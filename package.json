@@ -22,7 +22,7 @@
     "compile": "npm run compile-cjs && npm run compile-es",
     "lint": "eslint src test --ext=js,jsx",
     "test": "cross-env BABEL_ENV=cjs mocha --compilers js:babel-core/register --recursive --require babel-polyfill",
-    "prepublish": "npm test && npm run lint && npm run compile"
+    "prepublish": "npm run lint && npm test && npm run compile"
   },
   "dependencies": {
     "lodash": "4.x",
