@@ -1,6 +1,6 @@
 {
   "name": "redux-rsi",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Utility & helper functions for reducing the boilerplate necessary when creating redux reducers & actions",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "lodash": "4.x",
-    "reselect": "2.x",
     "seamless-immutable": "6.x",
     "shallowequal": "0.2.x"
   },
@@ -47,7 +46,7 @@
     "cross-env": "^3.2.4",
     "enzyme": "^2.8.0",
     "eslint": "3.x",
-    "eslint-config-civicsource": "1.x",
+    "eslint-config-civicsource": "5.x",
     "jsdom": "^9.12.0",
     "mocha": "3.x",
     "react": "^15.4.2",
