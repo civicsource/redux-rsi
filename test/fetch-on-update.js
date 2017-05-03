@@ -12,7 +12,7 @@ describe("Fetching on component props update", function() {
 	const NakedComponent = () => <span>Hello, world</span>;
 
 	describe("when rendering a component without specifying keys", function() {
-		beforeEach(function () {
+		beforeEach(function() {
 			this.callCount = 0;
 
 			this.FetchingComponent = fetchOnUpdate(() => {
@@ -21,7 +21,7 @@ describe("Fetching on component props update", function() {
 		});
 
 		describe("for the first time", function() {
-			beforeEach(function () {
+			beforeEach(function() {
 				this.wrapper = mount(<this.FetchingComponent />);
 			});
 
@@ -30,7 +30,7 @@ describe("Fetching on component props update", function() {
 			});
 
 			describe("and then setting arbitrary props on the component", function() {
-				beforeEach(function () {
+				beforeEach(function() {
 					this.wrapper.setProps({ hello: "world" });
 				});
 
@@ -42,16 +42,20 @@ describe("Fetching on component props update", function() {
 	});
 
 	describe("when rendering a component while specifying keys", function() {
-		beforeEach(function () {
+		beforeEach(function() {
 			this.callCount = 0;
 
-			this.FetchingComponent = fetchOnUpdate(() => {
-				this.callCount++;
-			}, "name", "age")(NakedComponent);
+			this.FetchingComponent = fetchOnUpdate(
+				() => {
+					this.callCount++;
+				},
+				"name",
+				"age"
+			)(NakedComponent);
 		});
 
 		describe("for the first time", function() {
-			beforeEach(function () {
+			beforeEach(function() {
 				this.wrapper = mount(<this.FetchingComponent name="Homer Simpson" />);
 			});
 
@@ -60,7 +64,7 @@ describe("Fetching on component props update", function() {
 			});
 
 			describe("and then setting a keyed prop on the component", function() {
-				beforeEach(function () {
+				beforeEach(function() {
 					this.wrapper.setProps({ name: "Marge Simpson" });
 				});
 
@@ -70,7 +74,7 @@ describe("Fetching on component props update", function() {
 			});
 
 			describe("and then setting a previously unspecified keyed prop on the component", function() {
-				beforeEach(function () {
+				beforeEach(function() {
 					this.wrapper.setProps({ age: 42 });
 				});
 
@@ -80,7 +84,7 @@ describe("Fetching on component props update", function() {
 			});
 
 			describe("and then setting arbitrary props on the component", function() {
-				beforeEach(function () {
+				beforeEach(function() {
 					this.wrapper.setProps({ hello: "world" });
 				});
 
@@ -92,7 +96,7 @@ describe("Fetching on component props update", function() {
 	});
 
 	describe("when rendering a component while specifying a deep key", function() {
-		beforeEach(function () {
+		beforeEach(function() {
 			this.callCount = 0;
 
 			this.FetchingComponent = fetchOnUpdate(() => {
@@ -101,7 +105,7 @@ describe("Fetching on component props update", function() {
 		});
 
 		describe("for the first time", function() {
-			beforeEach(function () {
+			beforeEach(function() {
 				const user = {
 					name: {
 						first: "Homer",
@@ -117,7 +121,7 @@ describe("Fetching on component props update", function() {
 			});
 
 			describe("and then setting a keyed nested prop on the component", function() {
-				beforeEach(function () {
+				beforeEach(function() {
 					const user = {
 						name: {
 							first: "Marge",
@@ -134,7 +138,7 @@ describe("Fetching on component props update", function() {
 			});
 
 			describe("and then setting arbitrary deep props on the component", function() {
-				beforeEach(function () {
+				beforeEach(function() {
 					const user = {
 						name: {
 							first: "Homer",

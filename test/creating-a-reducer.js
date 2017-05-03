@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { createReducer } from "../src";
 
-describe("Creating a reducer", function () {
-	beforeEach(function () {
+describe("Creating a reducer", function() {
+	beforeEach(function() {
 		this.reducer = createReducer("nothing", {
 			onThingHappened(state, payload, meta) {
 				return `${state}, thing happened with ${payload} & ${meta}`;
@@ -79,7 +79,9 @@ describe("Creating a reducer", function () {
 		});
 
 		it("should dispatch the action to the handler function", function() {
-			expect(this.state).to.equal("ohhai, ouch the thing broke with goodbye & universe");
+			expect(this.state).to.equal(
+				"ohhai, ouch the thing broke with goodbye & universe"
+			);
 		});
 	});
 });
