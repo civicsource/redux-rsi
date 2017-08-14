@@ -1,7 +1,6 @@
 {
 	"presets": [
 		["es2015", { "modules": false }],
-		"react",
 		"stage-2"
 	],
 	"plugins": [
@@ -10,7 +9,7 @@
 	],
 	"env": {
 		"cjs": {
-			"presets": ["es2015", "react", "stage-2"]
+			"presets": ["es2015", "stage-2"]
 		}
 	}
 }
