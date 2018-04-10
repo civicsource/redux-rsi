@@ -30,7 +30,7 @@
     "seamless-immutable": "6.x"
   },
   "peerDependencies": {
-    "redux": "4.0.0-beta.2"
+    "redux": ">= 3.x < 5"
   },
   "devDependencies": {
     "babel-cli": "6.x",
