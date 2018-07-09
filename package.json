@@ -1,6 +1,6 @@
 {
   "name": "redux-rsi",
-  "version": "4.1.0-beta.1",
+  "version": "4.1.0-beta.2",
   "description": "Utility & helper functions for reducing the boilerplate necessary when creating redux reducers & actions",
   "main": "lib/index.js",
   "module": "es/index.js",

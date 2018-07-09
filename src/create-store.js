@@ -3,10 +3,26 @@
 import { combineReducers, createStore as _createStore } from "redux";
 import registry from "./registry";
 
-export default function createStore(initialState, enhancer) {
-	if (!initialState) initialState = {};
+export default function createStore(
+	initialState,
+	enhancer,
+	combineFn = combineReducers
+) {
+	// Preserve initial state for not-yet-loaded reducers
+	const combine = reducers => {
+		if (initialState) {
+			const reducerNames = Object.keys(reducers);
+			Object.keys(initialState).forEach(item => {
+				if (reducerNames.indexOf(item) === -1) {
+					reducers[item] = (state = null) => state;
+				}
+			});
+		}
 
-	const reducer = combine(registry.getReducers(), initialState);
+		return combineFn(reducers);
+	};
+
+	const reducer = combine(registry.getReducers());
 	const store = _createStore(reducer, initialState, enhancer);
 
 	// Replace the store's reducer whenever a new reducer is registered.
@@ -15,18 +31,4 @@ export default function createStore(initialState, enhancer) {
 	});
 
 	return store;
-}
-
-// Preserve initial state for not-yet-loaded reducers
-function combine(reducers, initialState) {
-	if (initialState) {
-		const reducerNames = Object.keys(reducers);
-		Object.keys(initialState).forEach(item => {
-			if (reducerNames.indexOf(item) === -1) {
-				reducers[item] = (state = null) => state;
-			}
-		});
-	}
-
-	return combineReducers(reducers);
 }
