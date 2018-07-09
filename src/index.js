@@ -1,3 +1,8 @@
+import registry from "./registry";
+
+export const registerReducer = registry.register.bind(registry);
+export const clearReducerRegistry = registry.clear.bind(registry);
+
 export createReducer from "./create-reducer";
 export mergeWithCurrent from "./merge-with-current";
 
@@ -7,4 +12,3 @@ export createAjaxAction from "./create-ajax-action";
 export createSelector from "./create-selector";
 
 export createStore from "./create-store";
-export registry from "./registry";

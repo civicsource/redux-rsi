@@ -1,12 +1,12 @@
 import { expect } from "chai";
-import { createStore, registry } from "../src";
+import { createStore, registerReducer, clearReducerRegistry } from "../src";
 
 describe("Creating a store", function() {
 	const increment = () => ({ type: "INCREMENT" });
 	const decrement = () => ({ type: "DECREMENT" });
 
 	beforeEach(function() {
-		registry.clear();
+		clearReducerRegistry();
 
 		this.reducer = (state, { type }) => {
 			if (state === undefined) return 0;
@@ -35,7 +35,7 @@ describe("Creating a store", function() {
 
 		describe("and then registering a reducer", function() {
 			beforeEach(function() {
-				registry.register("counter", this.reducer);
+				registerReducer("counter", this.reducer);
 			});
 
 			it("should return non-empty state", function() {
@@ -52,7 +52,7 @@ describe("Creating a store", function() {
 
 	describe("when creating a store after reducer registrations", function() {
 		beforeEach(function() {
-			registry.register("count", this.reducer);
+			registerReducer("count", this.reducer);
 			this.store = createStore();
 		});
 
@@ -84,7 +84,7 @@ describe("Creating a store", function() {
 
 		describe("and then registering a reducer", function() {
 			beforeEach(function() {
-				registry.register("count", this.reducer);
+				registerReducer("count", this.reducer);
 			});
 
 			it("should handle dispatches", function() {
