@@ -41,9 +41,9 @@
     "babel-preset-es2015": "6.x",
     "babel-preset-stage-2": "6.x",
     "chai": "3.x",
-    "cross-env": "^3.2.4",
-    "eslint": "3.x",
-    "eslint-config-civicsource": "1.x",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.1.0",
+    "eslint-config-civicsource": "^9.0.0",
     "mocha": "3.x",
     "rimraf": "2.x"
   }
