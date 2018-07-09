@@ -4,7 +4,7 @@
 
 ![rsi](rsi.jpg)
 
-Utility & helper functions for reducing the (already pretty minimal) boilerplate necessary when creating redux reducers & actions.
+Utility & helper functions for reducing the boilerplate necessary when creating redux reducers & actions.
 
 This is also what our team uses to enforce coding conventions when writing redux applications. It helps to keep things consistent.
 
