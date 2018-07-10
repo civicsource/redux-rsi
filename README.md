@@ -226,7 +226,7 @@ The above two examples are equivalent. The `initFn` will receive the state `key`
 
 ### `registerReducer(name, reducer)`
 
-In order to effectively encapsulate the state tree structure from the rest of your app, it is adventageous to [colocate your selector functions with your reducers](https://egghead.io/lessons/javascript-redux-colocating-selectors-with-reducers). As your app grows, using this approach you will find that you end up with a massive root reducer file filled with repetetive selector functions just drilling down the state tree to child reducers. The static definition of the reducer/state tree does not scale. If you find yourself in this situation, it can help to introduce a reducer registry to implement the [redux module concept](http://randycoulman.com/blog/2018/06/12/solving-circular-dependencies-in-modular-redux/).
+In order to effectively encapsulate the state tree structure from the rest of your app, it is advantageous to [colocate your selector functions with your reducers](https://egghead.io/lessons/javascript-redux-colocating-selectors-with-reducers). As your app grows, using this approach you will find that you end up with a massive root reducer file filled with repetetive selector functions just drilling down the state tree to child reducers. The static definition of the reducer/state tree does not scale. If you find yourself in this situation, it can help to introduce a reducer registry to implement the [redux module concept](http://randycoulman.com/blog/2018/06/12/solving-circular-dependencies-in-modular-redux/).
 
 `registerReducer` registers a reducer function with the registry with a given name so that any selector functions defined with that reducer will know where they are located within the state tree. This effectively inverts the control of the structure of the state tree. Instead of the application consuming the reducers defining what the state tree looks like, it is the reducers themselves that are defining where they will live within the tree.
 
@@ -258,13 +258,12 @@ This API is meant to mirror the official [redux `createStore` API](https://redux
 
 All parameters are optional and match the behavior of the [official API](https://redux.js.org/api-reference/createstore).
 
-The `combineFn`, if specified, will override the function to use to combine the reducers together. By default, if not specified, it will use the [`combineReducers` function from redux](https://redux.js.org/api-reference/combinereducers). It may be advantageous, depending on your app, to use a different function (e.g. [`combineReducers` from _redux-seamless-immutable_](https://github.com/eadmundo/redux-seamless-immutable)).
+The `combineFn`, if specified, will override the function to use to combine the reducers together. By default, if not specified, it will use the [`combineReducers` function from redux](https://redux.js.org/api-reference/combinereducers). Depending on the needs of your app, you may want to use a different function (e.g. [`combineReducers` from _redux-seamless-immutable_](https://github.com/eadmundo/redux-seamless-immutable)).
 
 ```js
-// using the example above from regsterReducer
 // app.js
 import { createStore } from "redux-rsi";
-import init, { getCount } from "./reducer";
+import init, { getCount } from "./reducer"; // using the example above from registerReducer
 
 init();
 const store = createStore();
