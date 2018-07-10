@@ -1,12 +1,12 @@
 import { expect } from "chai";
-import { createStore, registerReducer, clearReducerRegistry } from "../src";
+import { createStore, registerReducer, resetReducers } from "../src";
 
 describe("Creating a store", function() {
 	const increment = () => ({ type: "INCREMENT" });
 	const decrement = () => ({ type: "DECREMENT" });
 
 	beforeEach(function() {
-		clearReducerRegistry();
+		resetReducers();
 
 		this.reducer = (state, { type }) => {
 			if (state === undefined) return 0;
