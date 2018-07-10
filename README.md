@@ -1,6 +1,6 @@
 # Redux RSI
 
-> Reduce your risk of [repetitive strain injury](https://en.wikipedia.org/wiki/Repetitive_strain_injury) when using [Redux](http://rackt.org/redux/)
+> Reduce your risk of [repetitive strain injury](https://en.wikipedia.org/wiki/Repetitive_strain_injury) when using [Redux](https://redux.js.org/)
 
 ![rsi](rsi.jpg)
 
