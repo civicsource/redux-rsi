@@ -26,7 +26,6 @@ npm install redux-rsi --save
 4. [`mergeWithCurrent`](#mergewithcurrentstate-key-data-initfn)
 5. [`registerReducer`](#registerreducername-reducer)
 6. [`createStore`](#createstoreinitialstate-enhancer-combinefn)
-7. [`resetReducers`](#resetreducers)
 
 ### `createReducer(initialState, handlers)`
 
@@ -245,9 +244,7 @@ const reducer = (state, { type }) => {
 	return state;
 };
 
-export default function init() {
-	registerReducer(REDUCER_NAME, reducer);
-}
+registerReducer(REDUCER_NAME, reducer);
 
 export const getCount = state => state[REDUCER_NAME];
 ```
@@ -263,9 +260,8 @@ The `combineFn`, if specified, will override the function to use to combine the 
 ```js
 // app.js
 import { createStore } from "redux-rsi";
-import init, { getCount } from "./reducer"; // using the example above from registerReducer
+import { getCount } from "./reducer"; // using the example above from registerReducer
 
-init();
 const store = createStore();
 
 this.store.dispatch({ type: "INCREMENT" });
@@ -274,29 +270,6 @@ console.log(getCount(this.store.getState())); // 1
 ```
 
 Any reducers registered after the store has been created will cause the store to reload and add the new reducers dynamically. This allows for incremental loading and code splitting of reducers.
-
-### `resetReducers()`
-
-After registering reducers and creating a store from those registrations, `resetReducers` will clear the reducer registry and discard any store subscriptions. This effectively disconnects any created store from listening for new reducer changes. This is only really meant to be used when writing tests for your reducers. After each test case in which you register reducers and create a store, you should call `resetReducers` to ensure the next test case will start with a clean slate.
-
-```js
-// using mocha as an example
-import { createStore, resetReducers } from "redux-rsi";
-import init from "./myapp/reducer";
-
-export default function() {
-	beforeEach(function() {
-		init();
-		this.store = createStore();
-	});
-
-	afterEach(function() {
-		resetReducers();
-	});
-
-	// ... your test cases using this.store
-}
-```
 
 ## Contributing
 

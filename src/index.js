@@ -1,7 +1,6 @@
 import registry from "./registry";
 
 export const registerReducer = registry.register.bind(registry);
-export const resetReducers = registry.reset.bind(registry);
 
 export createReducer from "./create-reducer";
 export mergeWithCurrent from "./merge-with-current";

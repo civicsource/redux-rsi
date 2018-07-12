@@ -2,7 +2,8 @@
 
 export class ReducerRegistry {
 	constructor() {
-		this.reset();
+		this.emitChange = null;
+		this.reducers = {};
 	}
 
 	getReducers() {
@@ -15,7 +16,6 @@ export class ReducerRegistry {
 	}
 
 	reset() {
-		this.emitChange = null;
 		this.reducers = {};
 	}
 
